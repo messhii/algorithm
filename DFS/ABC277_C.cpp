@@ -1,33 +1,30 @@
 #include <iostream>
-#include <vector>
+#include <map>
 using namespace std;
 
 int n;
-vector<vector<int>> g;
-bool visited[(int)(1e9+10)];
-int ans = 0;
+map<int, vector<int>> g;
+map<int, bool> visited;
+int ans = 1;
 
-void dfs(int v, int sum){
+void dfs(int v){
     visited[v] = true;
-    ans = max(ans, sum);
+    ans = max(ans, v);
     for(int next_v: g[v]){
         if(visited[next_v]) continue;
-        dfs(next_v, sum + next_v - v);
+        dfs(next_v);
     }
-    visited[v] = false;
 }
 
 int main(){
     cin >> n;
-    g.resize(n + 1);
-
     for(int i=0; i<n; i++){
         int a, b;
         cin >> a >> b;
         g[a].push_back(b);
         g[b].push_back(a);
     }
-    dfs(1, 0);
+    dfs(1);
     cout << ans << endl;
     return 0;
 }
