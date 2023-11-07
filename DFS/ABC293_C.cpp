@@ -7,16 +7,16 @@ int a[15][15];
 map<int, bool> visited;
 int ans = 0;
 
-void dfs(int y, int x){
-    visited[a[y][x]] = true;
-    if(y == h && x == w) ans++;
-    if(y + 1 <= h && !visited[a[y + 1][x]]){
-        dfs(y + 1, x);
-        visited[a[y + 1][x]] = false;
+void dfs(int x, int y){
+    visited[a[x][y]] = true;
+    if(x == h && y == w) ans++;
+    if(x + 1 <= h && !visited[a[x + 1][y]]){
+        dfs(x + 1, y);
+        visited[a[x + 1][y]] = false;
     }
-    if(x + 1 <= w && !visited[a[y][x + 1]]){
-        dfs(y, x + 1);
-        visited[a[y][x + 1]] = false;
+    if(y + 1 <= w && !visited[a[x][y + 1]]){
+        dfs(x, y + 1);
+        visited[a[x][y + 1]] = false;
     }
 }
 
