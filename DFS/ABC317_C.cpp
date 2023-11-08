@@ -1,18 +1,18 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int n, m;
-vector<vector<pair<int, int>>> g(15);
-int visited[15];
+int dist[15][15];
+bool visited[15];
 int ans = 0;
 
 void dfs(int v, int sum){
     visited[v] = true;
     ans = max(ans, sum);
-    for(auto [v_next, dis]: g[v]){
-        if(visited[v_next]) continue;
-        dfs(v_next, sum + dis);
+    for(int v2=1; v2<=n; v2++){
+        if(!visited[v2] && dist[v][v2] > 0){
+            dfs(v2, sum + dist[v][v2]);
+        }
     }
     visited[v] = false;
 }
@@ -22,8 +22,8 @@ int main(){
     for(int i=0; i<m; i++){
         int a, b, c;
         cin >> a >> b >> c;
-        g[a].push_back(make_pair(b, c));
-        g[b].push_back(make_pair(a, c));
+        dist[a][b] = c;
+        dist[b][a] = c;
     }
     for(int i=1; i<=n; i++){
         dfs(i, 0);
