@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <map>
 using namespace std;
 
 int main(){
@@ -11,15 +10,15 @@ int main(){
 
     int ans = 0;
     for(int bit=0; bit < (1<<n); bit++){
-        map<char, int> mp;
+        int alpha_cnt[26] = {};
         for(int i=0; i<n; i++){
             if(bit & (1<<i)){
-                for(auto e: s[i]) mp[e]++;
+                for(auto e: s[i]) alpha_cnt[e - 'a']++;
             }
         }
         int cnt = 0;
-        for(auto [key, value]: mp){
-            if(value == k) cnt++;
+        for(int i=0; i<26; i++){
+            if(alpha_cnt[i] == k) cnt++;
         }
         ans = max(ans, cnt);
     }
