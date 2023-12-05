@@ -12,12 +12,11 @@ void dfs(int x, int y){
     if(x == h && y == w) ans++;
     if(x + 1 <= h && !visited[a[x + 1][y]]){
         dfs(x + 1, y);
-        visited[a[x + 1][y]] = false;
     }
     if(y + 1 <= w && !visited[a[x][y + 1]]){
         dfs(x, y + 1);
-        visited[a[x][y + 1]] = false;
     }
+    visited[a[x][y]] = false;
 }
 
 int main(){
