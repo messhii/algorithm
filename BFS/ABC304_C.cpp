@@ -7,30 +7,23 @@ using namespace std;
 int main(){
     int n, d;
     cin >> n >> d;
-    vector<pair<int, int>> place(n + 1);
+    vector<int> x(n + 1), y(n + 1);
     vector<bool> visited(n + 1);
-    for(int i=1; i<=n; i++){
-        int x, y;
-        cin >> x >> y;
-        place[i] = make_pair(x, y);
-    }
-
-    queue<int> que;
-    que.push(1);
+    for(int i=1; i<=n; i++) cin >> x[i] >> y[i];    
+    
+    queue<pair<int, int>> que;
     visited[1] = true;
+    que.push(pair(x[1], y[1]));
     while(!que.empty()){
-        int v = que.front();
+        auto v = que.front();
         que.pop();
         for(int i=1; i<=n; i++){
-            if(visited[i]) continue;
-            int dist = pow((place[v].first - place[i].first), 2) + pow((place[v].second - place[i].second), 2);
-            if(dist <= d * d){
-                visited[i] = true;
-                que.push(i);
-            }            
+            int dist = pow(v.first - x[i], 2) + pow(v.second - y[i], 2);
+            if(visited[i] || dist > d * d) continue;
+            visited[i] = true;
+            que.push(make_pair(x[i], y[i]));
         }
     }
-
     for(int i=1; i<=n; i++){
         if(visited[i]) cout << "Yes" << endl;
         else cout << "No" << endl;
