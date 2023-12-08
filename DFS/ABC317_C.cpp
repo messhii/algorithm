@@ -22,8 +22,7 @@ int main(){
     for(int i=0; i<m; i++){
         int a, b, c;
         cin >> a >> b >> c;
-        dist[a][b] = c;
-        dist[b][a] = c;
+        dist[a][b] = dist[b][a] = c;
     }
     for(int i=1; i<=n; i++){
         dfs(i, 0);
