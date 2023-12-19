@@ -17,15 +17,15 @@ int main(){
         int total = 0;
         for(int i=0; i<n; i++){
             if(bit & 1<<i){
-                total += price[i];
                 for(int j=0; j<m; j++){
                     sum[j] += a[i][j];
                 }
+                total += price[i];
             }
         }
-        int cnt = 0;
-        for(int e: sum) if(e >= x) cnt++;
-        if(cnt == m) ans = min(ans, total);
+        bool flag = true;
+        for(int e: sum) if(e < x) flag = false;
+        if(flag) ans = min(ans, total);
     }
     if(ans == 1e9) ans = -1;
     cout << ans << endl;
