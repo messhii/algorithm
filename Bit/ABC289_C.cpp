@@ -14,8 +14,8 @@ int main(){
     }
 
     int ans = 0;
-    for(int bit=0; bit < (1 << m); bit++){
-        vector<bool> visited(n + 1);
+    for(int bit=1; bit < (1<<m); bit++){
+        vector<bool> visited(n+1);
         int x_cnt = 0;
         for(int i=0; i<m; i++){
             if(bit & (1 << i)){
